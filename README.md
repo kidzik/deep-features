@@ -6,6 +6,7 @@ Extraction of features from a convolutional neural network (VGG, AlexNet, etc.) 
 
 ## Preparation
 Download VGG (or other model)
+
     cd deep-features/models
     ./download_models.sh
 
