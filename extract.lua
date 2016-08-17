@@ -27,27 +27,20 @@ local function main(params)
    end
 
    print('Loading paths...\t[OK]')
-   images = {}
-
-   for i,file in ipairs(files) do
-      -- load each image
-      table.insert(images, image.load(file))
-   end
-
-   print('Loading images...\t[OK]')
    features = {}
 
    -- Go through the neural net
-   for i = 1,#images do
-      images[i] = image.scale(images[i],224,224)
-      table.insert(features, cnn:forward(images[i]))
+   for i,file in ipairs(files) do
+      local img = image.scale(image.load(file),224,224)
+      table.insert(features, cnn:forward(img))
+      print('Image '..i..'\t\t\t[OK]')
    end
 
    print('Extracting features...\t[OK]')
 
    -- Write a CSV
    local file = io.open(params.output_csv, "w")
-   for i = 1,#images do
+   for i = 1,#files do
       file:write(files[i], ",")
       for j=1,features[i]:size(1) do
 	 file:write(features[i][j])
