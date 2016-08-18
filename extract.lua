@@ -32,7 +32,7 @@ local function main(params)
    -- Go through the neural net
    for i,file in ipairs(files) do
       local img = image.scale(image.load(file),224,224)
-      table.insert(features, cnn:forward(img))
+      table.insert(features, cnn:forward(img):clone())
       print('Image '..i..'\t\t\t[OK]')
    end
 
